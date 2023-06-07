@@ -10,7 +10,7 @@ const habitSchema = new mongoose.Schema({
 
     records : [
         {
-            data: {
+            date: {
                 type: Date,
                 required: true,
             },
@@ -23,6 +23,6 @@ const habitSchema = new mongoose.Schema({
     ]
 });
 
-const Habit = mongoose.model(Habit, habitSchema);
+const Habit = mongoose.model('Habit', habitSchema);
 
 module.exports = Habit;
