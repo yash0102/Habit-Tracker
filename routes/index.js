@@ -7,4 +7,6 @@ router.get("/", homeController.home);
 
 router.post('/addHabit', homeController.addHabit);
 
+router.get("/delete/:id", homeController.deleteHabit);
+
 module.exports = router;

@@ -42,3 +42,16 @@ module.exports.addHabit = async (req, res) => {
     }
 };
 
+
+module.exports.deleteHabit = async (req, res) => {
+  try {
+      // console.log("params :",req.params.id);
+      await Habit.findByIdAndDelete(req.params.id);
+
+    return res.redirect('/');
+  } catch (err) {
+    console.log("Error in removing Habit :", err);
+    return;
+  }
+};
+
