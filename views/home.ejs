@@ -25,7 +25,7 @@
                             <option value="none" style="background-color: yellow;">None</option>
                             <option value="done" style="background-color: green;">Done</option>
                             <option value="not done" style="background-color: red;">Not Done</option>
-                          </select>
+                        </select>
                     <% } %>
                     <% if(i.records[l].status === 'done') { %>
                         <i class="fa fa-check-circle"></i>
@@ -33,7 +33,7 @@
                             <option value="done" style="background-color: green;">Done</option>
                             <option value="none" style="background-color: yellow;">None</option>
                             <option value="not done" style="background-color: red;">Not Done</option>
-                          </select>
+                            </select>
                     <% } %>
                     <% if(i.records[l].status === 'not done') { %>
                         <i class="fa fa-stop-circle"></i>
@@ -41,7 +41,7 @@
                             <option value="not done" style="background-color: red;">Not Done</option>
                             <option value="none" style="background-color: yellow;">None</option>
                             <option value="done" style="background-color: green;">Done</option>
-                          </select>
+                        </select>
                     <% } %>
                     <button type="submit" class="status-btn"><i class="fa fa-thumbs-up"></i></button>
                 </form>
@@ -49,7 +49,7 @@
                     view
                 </button></a>
                 <a href="/delete/<%= i.id %>" class="remove">
-                  <i class="fa fa-times-circle"></i>
+                    <i class="fa fa-times-circle"></i>
                 </a>
             </div>
             <% } %>
