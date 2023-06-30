@@ -23,9 +23,9 @@ module.exports.addHabit = async (req, res) => {
         if(!habit){
             const name = req.body.name;
             let date = new Date().toDateString(); // "Sat Jun 03 2023".
-            
+            // console.log('date: ',date);
             let newHabit = await Habit.create({
-            name: req.body.name,
+            name,
 
             records: [
               {
@@ -55,3 +55,39 @@ module.exports.deleteHabit = async (req, res) => {
   }
 };
 
+module.exports.details = async (req, res) => {
+  try {
+
+    const habitId = req.params.id;
+    const habit = await Habit.findById({_id:habitId});
+
+    return res.render('habitInfo', {
+      all_habits: habit
+    });
+
+  } catch (error) {
+    console.log('Error while fetching details', error);
+  }
+}
+
+
+// status update
+module.exports.updateStatus = async (req, res) => {
+  try {
+    const { habitId, id } = req.params;
+    const { status } = req.body;
+
+    // Find the habit by its id and update the specific day's status
+    const updatedHabit = await Habit.findOneAndUpdate(
+      { _id: habitId, "records._id": id },
+      { $set: { "records.$.status": status } },
+      { new: true }
+    );
+    return res.redirect("back");
+  } catch (err) {
+    res.status(500).json({
+      message: "Error updating habit status",
+      error: err.message,
+    });
+  }
+};

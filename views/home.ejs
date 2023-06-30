@@ -17,7 +17,7 @@
             <% for(i of habits) { %>
             <% let l = (i.records.length-1) %>
             <div class="habit-list-item">
-                <div class="habit">💪 <%= i.name %></div>
+                <div class="habit">✍️ <%= i.name %></div>
                 <form action="/update/<%= i._id %>/<%= i.records[l]._id %>" method="post">
                     <% if(i.records[l].status === 'none') { %>
                         <i class="fa fa-minus-circle"></i>

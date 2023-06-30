@@ -2,26 +2,31 @@ const mongoose = require('mongoose');
 
 // creating schema(blueprint) for habit
 
-const habitSchema = new mongoose.Schema({
-    name: {
+const habitSchema = new mongoose.Schema(
+    {
+        name: {
         type: String,
         required: true,
-    },
+        },
 
-    records : [
+        records: [
         {
             date: {
-                type: Date,
-                required: true,
+            type: String,
+            required: true,
             },
 
             status: {
-                type: String,
-                default: "none"
-            }
-        }
-    ]
-});
+            type: String,
+            default: "none",
+            },
+        },
+        ],
+    },
+    {
+        timestamps: true,
+    }
+);
 
 const Habit = mongoose.model('Habit', habitSchema);
 

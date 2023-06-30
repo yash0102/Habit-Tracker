@@ -1,10 +1,10 @@
 .center {
-    margin-top: 80px;
+    margin-top: 60px;
     display: flex;
     justify-content: center;
 }
 .todo-Container {
-    position: fixed;
+    position: absolute;
     color: black;
     padding: 20px;
     width: 50vw;
