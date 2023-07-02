@@ -3,6 +3,21 @@ const Habit = require('../modal/Habit');
 module.exports.home = async (req, res) => {
     // fetching mongoose
     try {
+            let habits = await Habit.find();
+            const currentDate = new Date().toDateString();
+            habits.forEach((habit) => {
+              let found = false;
+              habit.records.forEach((track) => {
+                if (track.date === currentDate) {
+                  found = true;
+                }
+              });
+              if (!found) {
+                habit.records.push({ date: currentDate, status: "none" });
+                habit.save();
+              }
+            });
+
             let habit = await Habit.find({});
             return res.render("home", {
             habits: habit,
@@ -23,7 +38,7 @@ module.exports.addHabit = async (req, res) => {
         if(!habit){
             const name = req.body.name;
             let date = new Date().toDateString(); // "Sat Jun 03 2023".
-            // console.log('date: ',date);
+            console.log('date: ',date);
             let newHabit = await Habit.create({
             name,
 
@@ -55,11 +70,16 @@ module.exports.deleteHabit = async (req, res) => {
   }
 };
 
+
+// 7 days data details
 module.exports.details = async (req, res) => {
   try {
 
     const habitId = req.params.id;
+    // console.log('habitId :', habitId);
     const habit = await Habit.findById({_id:habitId});
+
+    console.log('habit :',habit);
 
     return res.render('habitInfo', {
       all_habits: habit
@@ -77,7 +97,6 @@ module.exports.updateStatus = async (req, res) => {
     const { habitId, id } = req.params;
     const { status } = req.body;
 
-    // Find the habit by its id and update the specific day's status
     const updatedHabit = await Habit.findOneAndUpdate(
       { _id: habitId, "records._id": id },
       { $set: { "records.$.status": status } },
